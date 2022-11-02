@@ -5,7 +5,12 @@
 {% block body %}
     <div class="container">
         <h1 class="mt-4">Formulaire de connexion chez Miam Bonbon</h1>
-
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success mt-4">
+                {{ message }}
+            </div>
+            
+        {% endfor %}
         {% if error %}
         <div class=" pt-2 alert alert-danger">
             Oups mauvais mot de passe et/ou Utilisateur !

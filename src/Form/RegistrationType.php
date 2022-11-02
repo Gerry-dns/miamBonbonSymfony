@@ -4,12 +4,12 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -26,7 +26,7 @@ class RegistrationType extends AbstractType
                 ],
                 'label' => 'Nom / Prénom',
                 'label_attr' => [
-                    'class' => 'form-label'
+                    'class' => 'form-label mt-4'
                 ],
                 'constraints' => [
                     new Assert\NotBlank(),
@@ -41,9 +41,9 @@ class RegistrationType extends AbstractType
                     'maxlenght' => '180',
                 ],
                 
-                'label' => 'Adresse ',
+                'label' => 'Adresse email',
                 'label_attr' => [
-                    'class' => 'form-label'
+                    'class' => 'form-label mt-4'
                 ],
                 'constraints' => [
                     new Assert\NotBlank(),
@@ -52,25 +52,39 @@ class RegistrationType extends AbstractType
                 ]
 
             ])
-            ->add('PlainPassword', RepeatedType::class, [
+            ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
+               
                 'first_options' => [
-                    'label' => 'Mot de passe',
+                    'attr' => [
+                        'class' => 'form-control'
+                    ],
+                    'label' => 'Mot de passe:',
+                    'label_attr' => [
+                        'class' => 'form-label mt-4'
+                    ]
                 ],
-                'seconde_options' => [
-                    'label' => 'Confirmation du mot de passe'
+                'second_options' => [
+                    'attr' => [
+                        'class' => 'form-control'
+                    ],
+                    'label' => 'Confirmation du mot de passe:',
+                    'label_attr' => [
+                        'class' => 'form-label mt-4 '
+                    ]
                 ],
                 'invalid_message' => 'Les mots de passe ne correspondent pas.'
             ])
             ->add('pseudo', TextType::class, [
                 'attr' => [
-                    'class' => 'form-control',
+                    'class' => 'form-control', 
                     'minlenght' => '2',
                     'maxlenght' => '50',
                 ],
+                'required' => false,
                 'label' => 'Pseudo Facultatif',
                 'label_attr' => [
-                    'class' => 'form_label'
+                    'class' => 'form_label mt-4', 
                 ],
                 'constraints' => [
                     new Assert\Length(['min' =>2, 'max' =>50])
@@ -79,7 +93,8 @@ class RegistrationType extends AbstractType
             ])
             ->add('submit', SubmitType::class, [
                 'attr' => [
-                    'class' => 'btn btn-primary'
+                    'class' => 'btn btn-primary mt-4'
+                    
                 ]
             ]);
         ;
